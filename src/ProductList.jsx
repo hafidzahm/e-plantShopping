@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css';
 import CartItem from './CartItem';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
 function ProductList() {
   const [showCart, setShowCart] = useState(false);
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const [addedToCart, setAddedToCart] = useState({});
+  const cartQuantity = useSelector((state) => state.cart.items.reduce((total, item) => total + item.quantity, 0)); // Calculate total quantity
   const dispatch = useDispatch();
 
   const handleAddToCart = (product) => {
@@ -307,6 +308,7 @@ function ProductList() {
                     id="mainIconPathAttribute"
                   ></path>
                 </svg>
+                <span className="cart-quantity">{cartQuantity}</span>
               </h1>
             </a>
           </div>
