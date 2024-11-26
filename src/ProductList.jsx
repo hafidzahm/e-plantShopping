@@ -302,22 +302,25 @@ function ProductList() {
       </div>
       {!showCart ? (
         <div className="product-grid">
-          {plantsArray.map((item) => (
+          {plantsArray.map((category, index) => (
             <>
-              <div key={item.category}>
-                <>
-                  <h1>{item.category}</h1>
-                  {item.plants.map((item) => (
-                    <>
-                      <div key={item.name}>{item.name}</div>
-                      <div style={{ maxWidth: '40px', maxHeight: '40px' }}>
-                        <img src={item.image} alt="" />
+              <div key={index} className="product-list">
+                <div>
+                  <h1>{category.category}</h1>
+                  {category.plants.map((plant, plantIndex) => (
+                    <div className="product-card" key={plantIndex}>
+                      <div className="product-title">{plant.name}</div>
+                      <div className="product-image">
+                        <img src={plant.image} alt="" />
                       </div>
-                      <p>{item.description}</p>
-                      <p>{item.cost}</p>
-                    </>
+                      <p>{plant.description}</p>
+                      <p>{plant.cost}</p>
+                      <button className="product-button" onClick={() => handleAddToCart}>
+                        Add to cart
+                      </button>
+                    </div>
                   ))}
-                </>
+                </div>
               </div>
             </>
           ))}
