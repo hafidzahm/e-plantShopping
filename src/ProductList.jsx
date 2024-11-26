@@ -14,7 +14,7 @@ function ProductList() {
     dispatch(addItem(product));
     setAddedToCart((prevState) => ({
       ...prevState,
-      [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
+      [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart.
     }));
   };
 
@@ -329,8 +329,12 @@ function ProductList() {
                       </div>
                       <p>{plant.description}</p>
                       <p>${plant.cost}</p>
-                      <button className="product-button" onClick={() => handleAddToCart(plant)}>
-                        Add to cart
+                      <button
+                        className={addedToCart[plant.name] ? 'product-button-disabled' : 'product-button'}
+                        onClick={() => handleAddToCart(plant)}
+                        disabled={addedToCart[plant.name]}
+                      >
+                        {addedToCart[plant.name] ? 'Added to cart' : 'add to cart'}
                       </button>
                     </div>
                   ))}
